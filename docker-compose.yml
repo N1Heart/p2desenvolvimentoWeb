@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  
+  # 1. Serviço WEB (Apache + PHP)
+  web:
+    build: .  # <-- MUDANÇA AQUI: Constrói o Dockerfile local
+    container_name: php_web
+    ports:
+      - '8000:80' # Acesse em: http://localhost:8000
+    volumes:
+      - ./:/var/www/html/ 
+    networks:
+      - aula_network
+    depends_on:
+      - mysql
+    environment:
+      # Variáveis de ambiente que o database.php vai ler
+      - DB_HOST=mysql
+      - DB_NAME=aula_php_pdo
+      - DB_USER=php_user
+      - DB_PASS=php123
+
+  # 2. Serviço MySQL (Banco de Dados)
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: aula_php_pdo
+      MYSQL_USER: php_user
+      MYSQL_PASSWORD: php123
+    ports:
+      - '3307:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # Monta o script de criação das tabelas
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - aula_network
+    command: --default-authentication-plugin=mysql_native_password
+
+  # 3. Serviço PhpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: unless-stopped
+    environment: 
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root123
+    ports:
+      - '8080:80' # Acesse em: http://localhost:8080
+    depends_on:
+      - mysql
+    networks:
+      - aula_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  aula_network:
+    driver: bridge
