@@ -20,7 +20,7 @@ CREATE TABLE livros(
     titulo VARCHAR(100) NOT NULL,
     autor VARCHAR(100) NOT NULL,
     genero VARCHAR(100) NOT NULL,
-    ano_publicaco INT NOT NULL,
+    ano_publicacao INT NOT NULL,
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );

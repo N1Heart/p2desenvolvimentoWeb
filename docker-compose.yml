@@ -17,7 +17,7 @@ services:
     environment:
       # Variáveis de ambiente que o database.php vai ler
       - DB_HOST=mysql
-      - DB_NAME=aula_php_pdo
+      - DB_NAME=prova_web
       - DB_USER=php_user
       - DB_PASS=php123
 
@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: aula_php_pdo
+      MYSQL_DATABASE: prova_web
       MYSQL_USER: php_user
       MYSQL_PASSWORD: php123
     ports:

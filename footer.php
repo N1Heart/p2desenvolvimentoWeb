@@ -1,8 +1,8 @@
 </main>
 
 <footer>
-    <p style="text-aling: center; margin-top: 20px; color: #888;">
-        &copy; <?php echo date('y'); ?> Meu sistema CRUD
+    <p style="text-align: center; margin-top: 20px; color: #888;">
+        &copy; <?php echo date('Y'); ?> Meu sistema CRUD
     </p>
 </footer>
 
