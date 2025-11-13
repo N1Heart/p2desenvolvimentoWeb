@@ -4,7 +4,7 @@ services:
   
   # 1. Serviço WEB (Apache + PHP)
   web:
-    build: .  # <-- MUDANÇA AQUI: Constrói o Dockerfile local
+    build: .  
     container_name: php_web
     ports:
       - '8000:80' # Acesse em: http://localhost:8000
@@ -15,7 +15,6 @@ services:
     depends_on:
       - mysql
     environment:
-      # Variáveis de ambiente que o database.php vai ler
       - DB_HOST=mysql
       - DB_NAME=prova_web
       - DB_USER=php_user
@@ -35,7 +34,7 @@ services:
       - '3307:3306'
     volumes:
       - mysql_data:/var/lib/mysql
-      # Monta o script de criação das tabelas
+      
       - ./sql:/docker-entrypoint-initdb.d
     networks:
       - aula_network

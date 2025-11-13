@@ -14,7 +14,7 @@ require_once 'config/config.php';
     <nav>
         <div class="logo">Meu App</div>
         <ul>
-        <?php if(isset($_SESSION['user_id'])) ://mudar aqui tambem?>
+        <?php if(isset($_SESSION['user_id'])) :?>
             <li><a href="dashboard.php">Meus Livros</a></li>
             <li><a href="livro_form.php">Novo livro</a></li>
             <li><a href="logout.php">Logout (<?php echo htmlspecialchars($_SESSION['user_nome']);   // mudar o nome aqui se user não apontar a tabela?>)</a></li> 

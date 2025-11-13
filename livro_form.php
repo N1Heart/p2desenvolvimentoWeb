@@ -43,16 +43,12 @@ if (isset($_GET['id'])) {
 include 'header.php';
 ?>
 
-<!-- O título muda dependendo do modo -->
 <h1><?php echo $is_edit_mode ? 'Editar Livro' : 'Cadastrar Novo Livro'; ?></h1>
 
-<!-- REQUISITO: O formulário usa POST -->
 <form action="livro_action.php" method="POST">
     
-    <!-- Campo oculto para definir a AÇÃO (criar ou atualizar) -->
     <input type="hidden" name="action" value="<?php echo $is_edit_mode ? 'update' : 'create'; ?>">
     
-    <!-- Se estiver editando, envia o ID do livro -->
     <?php if ($is_edit_mode): ?>
         <input type="hidden" name="id" value="<?php echo $livro_id; ?>">
     <?php endif; ?>

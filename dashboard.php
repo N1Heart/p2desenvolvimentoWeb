@@ -1,15 +1,13 @@
 <?php
-// dashboard.php (Página principal do CRUD de Livros - Read)
 require_once 'config/config.php';
-require_once 'auth_check.php'; // REQUISITO: Protege a página
-include 'header.php'; // Inclui o cabeçalho
+require_once 'auth_check.php'; 
+include 'header.php'; 
 
-$user_id = $user_id_logado; // Vem do auth_check.php
+$user_id = $user_id_logado; 
 
 echo "<h1>Meus Livros</h1>";
 echo "<p>Bem-vindo, " . htmlspecialchars($_SESSION['user_nome']) . "!</p>";
 
-// Lógica para buscar (READ) os livros do usuário logado
 $stmt = $conn->prepare("SELECT id, titulo, autor, genero, ano_publicacao FROM livros WHERE usuario_id = ? ORDER BY data_criacao DESC");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -29,10 +27,8 @@ $result = $stmt->get_result();
                     </p>
                 </div>
                 <div class="task-item-actions">
-                    <!-- REQUISITO: Uso de GET para passar ID para edição -->
                     <a href="livro_form.php?id=<?php echo $livro['id']; ?>" class="action-link edit-link">Editar</a>
                     
-                    <!-- REQUISITO: Uso de GET para passar ID para exclusão -->
                     <a href="livro_action.php?action=delete&id=<?php echo $livro['id']; ?>" class="action-link delete-link">Excluir</a>
                 </div>
             </div>
@@ -46,5 +42,5 @@ $result = $stmt->get_result();
 <?php
 $stmt->close();
 $conn->close();
-include 'footer.php'; // Inclui o rodapé
+include 'footer.php'; 
 ?>
